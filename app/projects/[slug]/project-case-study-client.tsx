@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ArrowLeft, ExternalLink, FileText, PlayCircle } from "lucide-react"
 import { GithubIcon } from "@/components/brand-icons"
 import { LanguageProvider, useLanguage } from "@/lib/i18n/language-context"
+import { withBasePath } from "@/lib/site-paths"
 import { translations, type Language, type ProjectContent } from "@/lib/i18n/translations"
 
 function findProject(slug: string, lang: Language): ProjectContent | undefined {
@@ -79,7 +80,7 @@ function DemoVideo({ video }: { video: NonNullable<ProjectContent["demoVideo"]> 
   return (
     <SectionBlock title={video.title}>
       <div className="mt-4 overflow-hidden rounded-xl border border-border bg-black">
-        <video ref={videoRef} src={video.src} controls preload="metadata" className="aspect-video w-full" />
+        <video ref={videoRef} src={withBasePath(video.src)} controls preload="metadata" className="aspect-video w-full" />
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {rates.map((speed) => (
@@ -145,7 +146,7 @@ function ProjectCaseStudy({ slug }: { slug: string }) {
             </div>
           </div>
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border bg-card">
-            <Image src={project.coverImage} alt={project.coverAlt} fill priority sizes="(min-width: 1024px) 45vw, 100vw" className="object-contain" />
+            <Image src={withBasePath(project.coverImage) ?? project.coverImage} alt={project.coverAlt} fill priority sizes="(min-width: 1024px) 45vw, 100vw" className="object-contain" />
           </div>
         </header>
 
@@ -208,7 +209,7 @@ function ProjectCaseStudy({ slug }: { slug: string }) {
                   <figure key={screenshot.src} className="overflow-hidden rounded-xl border border-border bg-secondary/20">
                     <div className="relative aspect-[16/10]">
                       <Image
-                        src={screenshot.src}
+                        src={withBasePath(screenshot.src) ?? screenshot.src}
                         alt={screenshot.alt}
                         fill
                         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"

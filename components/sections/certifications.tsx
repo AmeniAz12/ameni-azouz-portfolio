@@ -3,6 +3,7 @@
 import Image from "next/image"
 import { Award } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
+import { withBasePath } from "@/lib/site-paths"
 import { Reveal } from "@/components/reveal"
 import { SectionHeader } from "@/components/section-header"
 
@@ -43,7 +44,7 @@ export function Certifications() {
                     <div className="mb-4 overflow-hidden rounded-lg border border-border bg-secondary/20">
                       <div className="relative aspect-[16/11]">
                         <Image
-                          src={cert.certificateImage.src}
+                          src={withBasePath(cert.certificateImage.src) ?? cert.certificateImage.src}
                           alt={cert.certificateImage.alt}
                           fill
                           sizes="(min-width: 640px) 50vw, 100vw"

@@ -5,6 +5,7 @@ import { Download, Mail, MapPin, Send, CircleCheckBig } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { CONTACT } from "@/lib/i18n/translations"
+import { withBasePath } from "@/lib/site-paths"
 import { Reveal } from "@/components/reveal"
 import { SectionHeader } from "@/components/section-header"
 
@@ -96,7 +97,7 @@ export function Contact() {
               </a>
             </div>
             <a
-              href={currentCv}
+              href={withBasePath(currentCv)}
               download={currentCvDownloadName}
               className="flex items-center justify-center gap-2 rounded-xl border border-border bg-card/60 p-4 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >

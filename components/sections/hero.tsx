@@ -6,6 +6,7 @@ import { GithubIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { NetworkBackground } from "@/components/network-background"
 import { CONTACT } from "@/lib/i18n/translations"
+import { withBasePath } from "@/lib/site-paths"
 
 function TerminalCard({ lines }: { lines: string[] }) {
   const [rendered, setRendered] = useState<string[]>([])
@@ -95,7 +96,7 @@ export function Hero() {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
-              href={currentCv}
+              href={withBasePath(currentCv)}
               download={currentCvDownloadName}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >

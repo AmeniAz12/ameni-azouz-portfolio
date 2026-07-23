@@ -7,6 +7,7 @@ import { GithubIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { Reveal } from "@/components/reveal"
 import { SectionHeader } from "@/components/section-header"
+import { withBasePath } from "@/lib/site-paths"
 import type { ProjectContent } from "@/lib/i18n/translations"
 
 function Tag({ children }: { children: React.ReactNode }) {
@@ -51,7 +52,7 @@ function ProjectCard({ project, delay }: { project: ProjectContent; delay: numbe
     >
       <div className="relative aspect-[16/9] border-b border-border bg-secondary/40">
         <Image
-          src={project.coverImage}
+          src={withBasePath(project.coverImage) ?? project.coverImage}
           alt={project.coverAlt}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"

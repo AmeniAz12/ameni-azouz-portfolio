@@ -6,6 +6,7 @@ import { useLanguage } from "@/lib/i18n/language-context"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { cn } from "@/lib/utils"
 import { CONTACT } from "@/lib/i18n/translations"
+import { withBasePath } from "@/lib/site-paths"
 
 const SECTIONS = [
   "home",
@@ -104,7 +105,7 @@ export function SiteNav() {
         <div className="flex items-center gap-2 sm:gap-3">
           <LanguageSwitcher />
           <a
-            href={currentCv}
+            href={withBasePath(currentCv)}
             download={currentCvDownloadName}
             className="hidden items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inline-flex"
           >
@@ -147,7 +148,7 @@ export function SiteNav() {
               </a>
             ))}
             <a
-              href={currentCv}
+              href={withBasePath(currentCv)}
               download={currentCvDownloadName}
               onClick={() => setOpen(false)}
               className="col-span-2 mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground"

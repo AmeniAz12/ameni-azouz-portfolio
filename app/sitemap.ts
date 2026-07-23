@@ -1,7 +1,12 @@
 import type { MetadataRoute } from "next"
 import { translations } from "@/lib/i18n/translations"
 
-const baseUrl = "https://ameni-azouz.vercel.app"
+export const dynamic = "force-static"
+
+const baseUrl =
+  process.env.GITHUB_PAGES === "true"
+    ? "https://ameniaz12.github.io/ameni-azouz-portfolio"
+    : "https://ameni-azouz-portfolio.vercel.app"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const projectRoutes = translations.en.projects.items.map((project) => ({

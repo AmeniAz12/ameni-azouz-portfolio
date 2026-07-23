@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { ProjectCaseStudyClient } from "./project-case-study-client"
+import { translations } from "@/lib/i18n/translations"
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>
@@ -138,6 +139,12 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
     title: "Project case study | Ameni Azzouz",
     description: "Cybersecurity project case study by Ameni Azzouz.",
   }
+}
+
+export function generateStaticParams() {
+  return translations.en.projects.items.map((project) => ({
+    slug: project.slug,
+  }))
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {

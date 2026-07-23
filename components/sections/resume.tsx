@@ -3,6 +3,7 @@
 import { Download, FileText } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { CONTACT } from "@/lib/i18n/translations"
+import { withBasePath } from "@/lib/site-paths"
 import { Reveal } from "@/components/reveal"
 
 export function Resume() {
@@ -33,7 +34,7 @@ export function Resume() {
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a
-                href={CONTACT.cvFr}
+                href={withBasePath(CONTACT.cvFr)}
                 download={CONTACT.cvFrDownloadName}
                 className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
@@ -41,7 +42,7 @@ export function Resume() {
                 {t.resume.downloadFr}
               </a>
               <a
-                href={CONTACT.cvEn}
+                href={withBasePath(CONTACT.cvEn)}
                 download={CONTACT.cvEnDownloadName}
                 className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-6 py-3 text-sm font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >

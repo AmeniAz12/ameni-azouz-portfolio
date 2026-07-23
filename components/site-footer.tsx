@@ -1,6 +1,7 @@
 "use client"
 
-import { Github, Linkedin, Mail, ShieldCheck } from "lucide-react"
+import { Mail, ShieldCheck } from "lucide-react"
+import { GithubIcon, LinkedinIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { CONTACT } from "@/lib/i18n/translations"
 
@@ -54,7 +55,7 @@ export function SiteFooter() {
               aria-label="GitHub"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <Github className="h-5 w-5" aria-hidden="true" />
+              <GithubIcon className="h-5 w-5" />
             </a>
             <a
               href={CONTACT.linkedin}
@@ -63,7 +64,7 @@ export function SiteFooter() {
               aria-label="LinkedIn"
               className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <Linkedin className="h-5 w-5" aria-hidden="true" />
+              <LinkedinIcon className="h-5 w-5" />
             </a>
             <a
               href={`mailto:${CONTACT.email}`}

@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowUpRight, Github, X } from "lucide-react"
+import { ArrowUpRight, X } from "lucide-react"
+import { GithubIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { Reveal } from "@/components/reveal"
 import { SectionHeader } from "@/components/section-header"
@@ -116,7 +117,7 @@ function CaseStudyModal({
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <Github className="h-4 w-4" aria-hidden="true" />
+            <GithubIcon className="h-4 w-4" />
             {t.projects.repoLabel}
           </a>
         </div>
@@ -170,7 +171,7 @@ export function Projects() {
                   aria-label={`${project.title} — ${t.projects.repoLabel}`}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
-                  <Github className="h-4 w-4" aria-hidden="true" />
+                  <GithubIcon className="h-4 w-4" />
                 </a>
               </div>
             </Reveal>

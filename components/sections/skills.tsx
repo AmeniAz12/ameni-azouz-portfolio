@@ -1,11 +1,11 @@
 "use client"
 
-import { Cloud, ShieldAlert, Crosshair, Server, Activity, Code2 } from "lucide-react"
+import { Cloud, ShieldAlert, Crosshair, Server, Activity, Code } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { Reveal } from "@/components/reveal"
 import { SectionHeader } from "@/components/section-header"
 
-const GROUP_ICONS = [Cloud, ShieldAlert, Crosshair, Server, Activity, Code2]
+const GROUP_ICONS = [Cloud, ShieldAlert, Crosshair, Server, Activity, Code]
 
 export function Skills() {
   const { t } = useLanguage()

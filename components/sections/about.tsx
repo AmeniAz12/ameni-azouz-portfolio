@@ -1,11 +1,11 @@
 "use client"
 
-import { Cloud, GitBranch, Code2, Bug, ShieldCheck, Terminal, Radar } from "lucide-react"
+import { Cloud, GitBranch, Code, Bug, ShieldCheck, Terminal, Radar } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { Reveal } from "@/components/reveal"
 import { SectionHeader } from "@/components/section-header"
 
-const FOCUS_ICONS = [Cloud, GitBranch, Code2, Bug, ShieldCheck, Terminal, Radar]
+const FOCUS_ICONS = [Cloud, GitBranch, Code, Bug, ShieldCheck, Terminal, Radar]
 
 export function About() {
   const { t } = useLanguage()

@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, MapPin, Github, Linkedin, Send, CheckCircle2 } from "lucide-react"
+import { Mail, MapPin, Send, CircleCheckBig } from "lucide-react"
+import { GithubIcon, LinkedinIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { CONTACT } from "@/lib/i18n/translations"
 import { Reveal } from "@/components/reveal"
@@ -79,7 +80,7 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-card/60 p-4 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Github className="h-5 w-5" aria-hidden="true" />
+                <GithubIcon className="h-5 w-5" />
                 GitHub
               </a>
               <a
@@ -88,7 +89,7 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="flex flex-1 items-center justify-center gap-2 rounded-xl border border-border bg-card/60 p-4 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Linkedin className="h-5 w-5" aria-hidden="true" />
+                <LinkedinIcon className="h-5 w-5" />
                 LinkedIn
               </a>
             </div>
@@ -97,7 +98,7 @@ export function Contact() {
           <Reveal delay={120}>
             {sent ? (
               <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-primary/30 bg-primary/5 p-8 text-center">
-                <CheckCircle2 className="h-10 w-10 text-primary" aria-hidden="true" />
+                <CircleCheckBig className="h-10 w-10 text-primary" aria-hidden="true" />
                 <p className="mt-4 text-pretty leading-relaxed text-foreground">{t.contact.success}</p>
               </div>
             ) : (

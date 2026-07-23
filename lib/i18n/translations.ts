@@ -214,7 +214,7 @@ export const translations: Record<Language, Translation> = {
       title: "Etudiante ingenieure en cybersecurite",
       subtitle: "DevSecOps · Securite applicative · Cloud Security · Pentest",
       description:
-        "Etudiante en derniere annee du cycle d'ingenieur TIC, specialisee en cybersecurite, je recherche un stage PFE ou une premiere opportunite junior en France a partir de janvier 2027. Mes projets documentent une demarche concrete en DevSecOps, securite applicative, SOC/SIEM, pentest et analyse de malware.",
+        "Etudiante en derniere annee du cycle d'ingenieur en cybersecurite, je recherche un stage PFE ou une premiere opportunite junior en France a partir de janvier 2027. Mes projets documentent une demarche concrete en DevSecOps, securite applicative, SOC/SIEM, pentest et analyse de malware.",
       viewProjects: "Voir mes projets",
       downloadCv: "Telecharger mon CV",
       github: "Voir mon GitHub",

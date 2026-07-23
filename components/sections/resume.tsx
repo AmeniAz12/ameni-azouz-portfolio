@@ -2,9 +2,8 @@
 
 import { Download, FileText } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
+import { CONTACT } from "@/lib/i18n/translations"
 import { Reveal } from "@/components/reveal"
-
-const CV_PATH = "/cv/ameni-azouz-cv.pdf"
 
 export function Resume() {
   const { t } = useLanguage()
@@ -32,15 +31,25 @@ export function Resume() {
             <p className="mx-auto mt-4 max-w-xl text-pretty leading-relaxed text-muted-foreground">
               {t.resume.subtitle}
             </p>
-            <a
-              href={CV_PATH}
-              download
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <Download className="h-4 w-4" aria-hidden="true" />
-              {t.resume.download}
-            </a>
-            <p className="mt-4 text-xs text-muted-foreground">{t.resume.note}</p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <a
+                href={CONTACT.cvFr}
+                download={CONTACT.cvFrDownloadName}
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Download className="h-4 w-4" aria-hidden="true" />
+                {t.resume.downloadFr}
+              </a>
+              <a
+                href={CONTACT.cvEn}
+                download={CONTACT.cvEnDownloadName}
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-6 py-3 text-sm font-medium transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <Download className="h-4 w-4" aria-hidden="true" />
+                {t.resume.downloadEn}
+              </a>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">{t.resume.missing}</p>
           </div>
         </Reveal>
       </div>

@@ -1,54 +1,69 @@
-import { Analytics } from '@vercel/analytics/next'
-import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
-
-const geistSans = Geist({
-  subsets: ['latin'],
-  variable: '--font-geist-sans',
-})
-
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  variable: '--font-geist-mono',
-})
+import { Analytics } from "@vercel/analytics/next"
+import type { Metadata, Viewport } from "next"
+import "./globals.css"
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ameni-azouz.vercel.app'),
+  metadataBase: new URL("https://ameni-azouz.vercel.app"),
   title: {
-    default: 'Ameni Azouz — Junior Cybersecurity Engineer | Ingénieure Cybersécurité',
-    template: '%s | Ameni Azouz',
+    default: "Ameni Azzouz - Cybersecurity Engineering Student",
+    template: "%s | Ameni Azzouz",
   },
   description:
-    'Portfolio of Ameni Azouz — final-year cybersecurity engineering student. Cloud Security, DevSecOps, Application Security & Penetration Testing. Seeking a graduation internship in France starting January 2027. Portfolio bilingue FR/EN.',
+    "Bilingual portfolio of Ameni Azzouz, cybersecurity engineering student. DevSecOps, application security, cloud security, penetration testing, malware analysis and SIEM. Available for a graduation internship or junior opportunity starting January 2027.",
   keywords: [
-    'cybersecurity',
-    'cybersécurité',
-    'cloud security',
-    'devsecops',
-    'application security',
-    'penetration testing',
-    'pentest',
-    'stage cybersécurité',
-    'internship France',
-    'Ameni Azouz',
+    "cybersecurity",
+    "cybersecurite",
+    "DevSecOps",
+    "application security",
+    "cloud security",
+    "penetration testing",
+    "pentest",
+    "malware analysis",
+    "SIEM",
+    "SOC",
+    "stage PFE cybersecurite",
+    "cybersecurity internship France",
+    "Ameni Azzouz",
   ],
-  authors: [{ name: 'Ameni Azouz' }],
+  authors: [{ name: "Ameni Azzouz" }],
   openGraph: {
-    title: 'Ameni Azouz — Junior Cybersecurity Engineer',
+    title: "Ameni Azzouz - Cybersecurity Engineering Student",
     description:
-      'Cloud Security · DevSecOps · Application Security · Penetration Testing. Bilingual FR/EN portfolio. Seeking a graduation internship in France from January 2027.',
-    type: 'website',
-    locale: 'fr_FR',
-    alternateLocale: ['en_US'],
+      "DevSecOps, application security, cloud security, penetration testing, malware analysis and SIEM. Bilingual FR/EN portfolio.",
+    url: "https://ameni-azouz.vercel.app",
+    type: "website",
+    locale: "fr_FR",
+    alternateLocale: ["en_US"],
+    siteName: "Ameni Azzouz Portfolio",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Ameni Azzouz cybersecurity portfolio",
+      },
+    ],
   },
-  generator: 'v0.app',
+  twitter: {
+    card: "summary_large_image",
+    title: "Ameni Azzouz - Cybersecurity Engineering Student",
+    description:
+      "DevSecOps, application security, cloud security, penetration testing, malware analysis and SIEM. Available from January 2027.",
+    images: ["/og-image.svg"],
+  },
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-icon.png",
+  },
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: '#0b1120',
-  width: 'device-width',
+  colorScheme: "dark",
+  themeColor: "#0b1120",
+  width: "device-width",
   initialScale: 1,
 }
 
@@ -58,10 +73,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`dark bg-background ${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className="dark bg-background">
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
   )

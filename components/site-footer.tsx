@@ -24,7 +24,7 @@ export function SiteFooter() {
         <div>
           <a href="#home" className="flex items-center gap-2 font-mono text-sm font-semibold">
             <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" />
-            Ameni Azouz
+            Ameni Azzouz
           </a>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">{t.footer.tagline}</p>
         </div>
@@ -79,7 +79,7 @@ export function SiteFooter() {
 
       <div className="border-t border-border/60">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:px-6">
-          <p>© {new Date().getFullYear()} Ameni Azouz. {t.footer.rights}</p>
+          <p>&copy; {new Date().getFullYear()} Ameni Azzouz. {t.footer.rights}</p>
           <p>{t.footer.builtWith}</p>
         </div>
       </div>

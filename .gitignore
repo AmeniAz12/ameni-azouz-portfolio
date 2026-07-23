@@ -5,6 +5,7 @@ __v0_jsx-dev-runtime.ts
 .snowflake/
 .v0-trash/
 .vercel/
+media-prep/
 
 # Environment variables
 .env*.local
@@ -13,3 +14,5 @@ __v0_jsx-dev-runtime.ts
 node_modules
 .next/
 .DS_Store
+
+.vercel

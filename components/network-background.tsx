@@ -23,6 +23,8 @@ export function NetworkBackground({ className }: { className?: string }) {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
+    const drawingCanvas = canvas
+    const drawingContext = ctx
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
     let width = 0
@@ -31,17 +33,17 @@ export function NetworkBackground({ className }: { className?: string }) {
     let raf = 0
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
 
-    const parent = canvas.parentElement
+    const parent = drawingCanvas.parentElement
 
     function resize() {
       const rect = parent?.getBoundingClientRect()
       width = rect?.width ?? window.innerWidth
       height = rect?.height ?? window.innerHeight
-      canvas.width = width * dpr
-      canvas.height = height * dpr
-      canvas.style.width = `${width}px`
-      canvas.style.height = `${height}px`
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+      drawingCanvas.width = width * dpr
+      drawingCanvas.height = height * dpr
+      drawingCanvas.style.width = `${width}px`
+      drawingCanvas.style.height = `${height}px`
+      drawingContext.setTransform(dpr, 0, 0, dpr, 0, 0)
 
       const density = Math.min(70, Math.floor((width * height) / 22000))
       nodes = Array.from({ length: density }, () => ({
@@ -55,7 +57,7 @@ export function NetworkBackground({ className }: { className?: string }) {
     const LINK_DIST = 140
 
     function draw() {
-      ctx.clearRect(0, 0, width, height)
+      drawingContext.clearRect(0, 0, width, height)
 
       for (const n of nodes) {
         n.x += n.vx
@@ -73,21 +75,21 @@ export function NetworkBackground({ className }: { className?: string }) {
           const dist = Math.hypot(dx, dy)
           if (dist < LINK_DIST) {
             const alpha = (1 - dist / LINK_DIST) * 0.35
-            ctx.strokeStyle = `rgba(90, 170, 235, ${alpha})`
-            ctx.lineWidth = 1
-            ctx.beginPath()
-            ctx.moveTo(a.x, a.y)
-            ctx.lineTo(b.x, b.y)
-            ctx.stroke()
+            drawingContext.strokeStyle = `rgba(90, 170, 235, ${alpha})`
+            drawingContext.lineWidth = 1
+            drawingContext.beginPath()
+            drawingContext.moveTo(a.x, a.y)
+            drawingContext.lineTo(b.x, b.y)
+            drawingContext.stroke()
           }
         }
       }
 
       for (const n of nodes) {
-        ctx.fillStyle = "rgba(120, 200, 245, 0.65)"
-        ctx.beginPath()
-        ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2)
-        ctx.fill()
+        drawingContext.fillStyle = "rgba(120, 200, 245, 0.65)"
+        drawingContext.beginPath()
+        drawingContext.arc(n.x, n.y, 1.6, 0, Math.PI * 2)
+        drawingContext.fill()
       }
 
       raf = requestAnimationFrame(draw)

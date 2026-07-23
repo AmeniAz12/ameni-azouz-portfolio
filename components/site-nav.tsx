@@ -5,6 +5,7 @@ import { Download, Menu, ShieldCheck, X } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { LanguageSwitcher } from "@/components/language-switcher"
 import { cn } from "@/lib/utils"
+import { CONTACT } from "@/lib/i18n/translations"
 
 const SECTIONS = [
   "home",
@@ -13,17 +14,19 @@ const SECTIONS = [
   "projects",
   "skills",
   "certifications",
+  "education",
+  "languages",
   "resume",
   "contact",
 ] as const
 
-const CV_PATH = "/cv/ameni-azouz-cv.pdf"
-
 export function SiteNav() {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState<string>("home")
+  const currentCv = lang === "fr" ? CONTACT.cvFr : CONTACT.cvEn
+  const currentCvDownloadName = lang === "fr" ? CONTACT.cvFrDownloadName : CONTACT.cvEnDownloadName
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -55,6 +58,8 @@ export function SiteNav() {
     projects: t.nav.projects,
     skills: t.nav.skills,
     certifications: t.nav.certifications,
+    education: t.nav.education,
+    languages: t.caseStudies.label,
     resume: t.nav.resume,
     contact: t.nav.contact,
   }
@@ -77,7 +82,7 @@ export function SiteNav() {
           className="flex items-center gap-2 rounded-md font-mono text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" />
-          <span>Ameni Azouz</span>
+          <span>Ameni Azzouz</span>
         </a>
 
         <div className="hidden items-center gap-1 lg:flex">
@@ -99,8 +104,8 @@ export function SiteNav() {
         <div className="flex items-center gap-2 sm:gap-3">
           <LanguageSwitcher />
           <a
-            href={CV_PATH}
-            download
+            href={currentCv}
+            download={currentCvDownloadName}
             className="hidden items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:inline-flex"
           >
             <Download className="h-4 w-4" aria-hidden="true" />
@@ -111,7 +116,7 @@ export function SiteNav() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
-            aria-label={open ? t.projects.closeLabel : t.nav.home}
+            aria-label={open ? "Close menu" : t.nav.menuLabel}
             className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -142,8 +147,8 @@ export function SiteNav() {
               </a>
             ))}
             <a
-              href={CV_PATH}
-              download
+              href={currentCv}
+              download={currentCvDownloadName}
               onClick={() => setOpen(false)}
               className="col-span-2 mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground"
             >

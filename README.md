@@ -1,33 +1,48 @@
-# ameni-azouz-portfolio
+# Ameni Azzouz Portfolio
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+Bilingual cybersecurity portfolio built with Next.js, React, TypeScript and Tailwind CSS.
 
-## Built with v0
+The site presents Ameni Azzouz, a final-year cybersecurity engineering student looking for a graduation internship or junior cybersecurity opportunity from January 2027, mainly in France.
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
+## Focus Areas
 
-[Continue working on v0 →](https://v0.app/chat/projects/prj_nvewG08YORgP29TWAKY1bnVnF8Jd)
+- DevSecOps and CI/CD security
+- Application security and OWASP Top 10
+- Cloud and container security
+- Penetration testing labs
+- Malware analysis in isolated environments
+- SOC, SIEM and security monitoring
 
-## Getting Started
+## Main Content
 
-First, run the development server:
+- Project case studies with methodology, evidence, risks and recommendations
+- FR/EN resume downloads
+- Achieved and in-progress certifications
+- Technical skills grouped by cybersecurity domain
+- Contact links for GitHub, LinkedIn and email
+
+## Tech Stack
+
+- Next.js App Router
+- React
+- TypeScript
+- Tailwind CSS
+- pnpm
+
+## Local Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Validation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm lint
+pnpm build
+```
 
-## Learn More
+## Security Note
 
-To learn more, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+Published reports, screenshots and videos must remain limited to authorized lab evidence. Do not publish secrets, tokens, passwords, internal IP addresses, malware samples, executable payloads or confidential information.

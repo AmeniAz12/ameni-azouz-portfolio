@@ -30,7 +30,19 @@ export function Education() {
               </div>
               <h3 className="mt-4 font-semibold text-balance">{item.degree}</h3>
               <p className="mt-1 text-sm text-primary">{item.school}</p>
+              {item.specialization && (
+                <p className="mt-2 font-mono text-xs uppercase tracking-wide text-accent">{item.specialization}</p>
+              )}
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.detail}</p>
+              {item.areas && (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {item.areas.map((area) => (
+                    <span key={area} className="rounded-md border border-border bg-secondary/40 px-2 py-0.5 text-xs text-muted-foreground">
+                      {area}
+                    </span>
+                  ))}
+                </div>
+              )}
             </Reveal>
           ))}
         </div>

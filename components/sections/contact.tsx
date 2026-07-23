@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, MapPin, Send, CircleCheckBig } from "lucide-react"
+import { Download, Mail, MapPin, Send, CircleCheckBig } from "lucide-react"
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { CONTACT } from "@/lib/i18n/translations"
@@ -11,10 +11,12 @@ import { SectionHeader } from "@/components/section-header"
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function Contact() {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" })
   const [error, setError] = useState<string | null>(null)
   const [sent, setSent] = useState(false)
+  const currentCv = lang === "fr" ? CONTACT.cvFr : CONTACT.cvEn
+  const currentCvDownloadName = lang === "fr" ? CONTACT.cvFrDownloadName : CONTACT.cvEnDownloadName
 
   const update = (key: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((f) => ({ ...f, [key]: e.target.value }))
@@ -33,8 +35,8 @@ export function Contact() {
       return
     }
 
-    const subject = encodeURIComponent(form.subject || `Contact — ${form.name}`)
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`)
+    const subject = encodeURIComponent(form.subject || `Contact - ${form.name}`)
+    const body = encodeURIComponent(`${form.message}\n\n- ${form.name} (${form.email})`)
     window.location.href = `mailto:${CONTACT.email}?subject=${subject}&body=${body}`
     setSent(true)
   }
@@ -93,6 +95,14 @@ export function Contact() {
                 LinkedIn
               </a>
             </div>
+            <a
+              href={currentCv}
+              download={currentCvDownloadName}
+              className="flex items-center justify-center gap-2 rounded-xl border border-border bg-card/60 p-4 text-sm font-medium transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <Download className="h-5 w-5" aria-hidden="true" />
+              {t.contact.downloadCv}
+            </a>
           </Reveal>
 
           <Reveal delay={120}>

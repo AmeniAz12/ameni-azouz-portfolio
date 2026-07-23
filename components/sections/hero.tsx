@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react"
 import { ArrowRight, Download, Mail, Circle } from "lucide-react"
+import { GithubIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { NetworkBackground } from "@/components/network-background"
-
-const CV_PATH = "/cv/ameni-azouz-cv.pdf"
+import { CONTACT } from "@/lib/i18n/translations"
 
 function TerminalCard({ lines }: { lines: string[] }) {
   const [rendered, setRendered] = useState<string[]>([])
@@ -53,7 +53,9 @@ function TerminalCard({ lines }: { lines: string[] }) {
 }
 
 export function Hero() {
-  const { t } = useLanguage()
+  const { lang, t } = useLanguage()
+  const currentCv = lang === "fr" ? CONTACT.cvFr : CONTACT.cvEn
+  const currentCvDownloadName = lang === "fr" ? CONTACT.cvFrDownloadName : CONTACT.cvEnDownloadName
 
   return (
     <section id="home" className="relative overflow-hidden">
@@ -93,12 +95,21 @@ export function Hero() {
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
             <a
-              href={CV_PATH}
-              download
+              href={currentCv}
+              download={currentCvDownloadName}
               className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <Download className="h-4 w-4" aria-hidden="true" />
               {t.hero.downloadCv}
+            </a>
+            <a
+              href={CONTACT.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              <GithubIcon className="h-4 w-4" />
+              {t.hero.github}
             </a>
             <a
               href="#contact"
@@ -109,7 +120,9 @@ export function Hero() {
             </a>
           </div>
 
-          <p className="mt-6 font-mono text-xs text-muted-foreground">{t.hero.availability}</p>
+          <p className="mt-6 font-mono text-xs text-muted-foreground">
+            {t.hero.availability} {t.hero.location}
+          </p>
         </div>
 
         <div className="flex flex-1 justify-center lg:justify-end">

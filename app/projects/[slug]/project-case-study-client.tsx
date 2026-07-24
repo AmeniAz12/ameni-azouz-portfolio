@@ -1,9 +1,9 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, ExternalLink, FileText, PlayCircle } from "lucide-react"
+import { ArrowLeft, ChevronLeft, ChevronRight, ExternalLink, FileText, PlayCircle, X } from "lucide-react"
 import { GithubIcon } from "@/components/brand-icons"
 import { LanguageProvider, useLanguage } from "@/lib/i18n/language-context"
 import { withBasePath } from "@/lib/site-paths"
@@ -100,9 +100,180 @@ function DemoVideo({ video }: { video: NonNullable<ProjectContent["demoVideo"]> 
   )
 }
 
+function ScreenshotGallery({
+  intro,
+  screenshots,
+  labels,
+}: {
+  intro?: string
+  screenshots: NonNullable<ProjectContent["screenshotImages"]>
+  labels: {
+    title: string
+    close: string
+    previous: string
+    next: string
+  }
+}) {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const triggerRefs = useRef<Array<HTMLButtonElement | null>>([])
+  const closeButtonRef = useRef<HTMLButtonElement>(null)
+  const activeScreenshot = activeIndex === null ? null : screenshots[activeIndex]
+
+  const close = () => {
+    const index = activeIndex
+    setActiveIndex(null)
+    if (index !== null) {
+      requestAnimationFrame(() => triggerRefs.current[index]?.focus())
+    }
+  }
+
+  const goTo = (direction: -1 | 1) => {
+    setActiveIndex((current) => {
+      if (current === null) return current
+      return (current + direction + screenshots.length) % screenshots.length
+    })
+  }
+
+  useEffect(() => {
+    if (activeIndex === null) return
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    closeButtonRef.current?.focus()
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") close()
+      if (event.key === "ArrowLeft") goTo(-1)
+      if (event.key === "ArrowRight") goTo(1)
+    }
+
+    window.addEventListener("keydown", onKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener("keydown", onKeyDown)
+    }
+  }, [activeIndex])
+
+  if (!screenshots.length) return null
+
+  return (
+    <section className="py-3">
+      <div className="mb-5">
+        <h2 className="text-xl font-semibold tracking-tight">{labels.title}</h2>
+        {intro && <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted-foreground">{intro}</p>}
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {screenshots.map((screenshot, index) => (
+          <figure
+            key={screenshot.src}
+            className="group overflow-hidden rounded-xl border border-border bg-card/55 p-2 transition-colors hover:border-primary/40"
+          >
+            <button
+              ref={(node) => {
+                triggerRefs.current[index] = node
+              }}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className="relative aspect-[16/10] w-full cursor-zoom-in overflow-hidden rounded-lg bg-secondary/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-label={`${labels.title}: ${screenshot.caption}`}
+            >
+              <Image
+                src={withBasePath(screenshot.src) ?? screenshot.src}
+                alt={screenshot.alt}
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-contain p-1 transition-transform duration-300 group-hover:scale-[1.015]"
+              />
+              <span className="pointer-events-none absolute right-2 top-2 rounded-md border border-border bg-background/80 px-2 py-1 font-mono text-[10px] text-muted-foreground opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+                Zoom
+              </span>
+            </button>
+            <figcaption className="min-h-[4.75rem] px-2 py-3">
+              <p className="text-sm font-medium leading-snug text-foreground">{screenshot.caption.split(" — ")[0]}</p>
+              <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                {screenshot.caption.split(" — ")[1] ?? screenshot.caption}
+              </p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      {activeScreenshot && activeIndex !== null && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${labels.title}: ${activeScreenshot.caption}`}
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-background/90 p-3 backdrop-blur-sm sm:p-6"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) close()
+          }}
+        >
+          <div className="flex max-h-[92vh] w-full max-w-6xl flex-col rounded-2xl border border-border bg-card shadow-2xl">
+            <div className="flex items-center justify-between gap-3 border-b border-border px-4 py-3">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-foreground">{activeScreenshot.caption.split(" — ")[0]}</p>
+                <p className="font-mono text-xs text-muted-foreground">
+                  {activeIndex + 1} / {screenshots.length}
+                </p>
+              </div>
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={close}
+                aria-label={labels.close}
+                className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <X className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </div>
+
+            <div className="relative flex min-h-0 flex-1 items-center justify-center p-3 sm:p-5">
+              <button
+                type="button"
+                onClick={() => goTo(-1)}
+                aria-label={labels.previous}
+                className="absolute left-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/80 text-foreground transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+              </button>
+              <div className="relative h-[70vh] max-h-[70vh] w-full">
+                <Image
+                  src={withBasePath(activeScreenshot.src) ?? activeScreenshot.src}
+                  alt={activeScreenshot.alt}
+                  fill
+                  sizes="90vw"
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <button
+                type="button"
+                onClick={() => goTo(1)}
+                aria-label={labels.next}
+                className="absolute right-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/80 text-foreground transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <ChevronRight className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+
+            <p className="border-t border-border px-4 py-3 text-sm leading-relaxed text-muted-foreground">
+              {activeScreenshot.caption.split(" — ")[1] ?? activeScreenshot.caption}
+            </p>
+          </div>
+        </div>
+      )}
+    </section>
+  )
+}
+
 function ProjectCaseStudy({ slug }: { slug: string }) {
   const { lang, t } = useLanguage()
   const project = findProject(slug, lang)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" })
+  }, [slug])
 
   if (!project) {
     return (
@@ -111,7 +282,7 @@ function ProjectCaseStudy({ slug }: { slug: string }) {
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           {t.projects.details.back}
         </Link>
-        <h1 className="mt-8 text-3xl font-bold">Project not found</h1>
+        <h1 className="mt-8 text-3xl font-bold">{lang === "fr" ? "Projet introuvable" : "Project not found"}</h1>
       </main>
     )
   }
@@ -176,7 +347,7 @@ function ProjectCaseStudy({ slug }: { slug: string }) {
             )}
           </SectionBlock>
 
-          <SectionBlock title={lang === "fr" ? "Resultats cles" : "Key findings"}>
+          <SectionBlock title={lang === "fr" ? "Résultats clés" : "Key findings"}>
             {project.keyFindings ? (
               <div className="mt-5 grid gap-4">
                 {project.keyFindings.map((finding) => (
@@ -201,29 +372,18 @@ function ProjectCaseStudy({ slug }: { slug: string }) {
             )}
           </SectionBlock>
 
-          <SectionBlock title={t.projects.details.screenshots}>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.screenshots[0]}</p>
-            {project.screenshotImages && (
-              <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {project.screenshotImages.map((screenshot) => (
-                  <figure key={screenshot.src} className="overflow-hidden rounded-xl border border-border bg-secondary/20">
-                    <div className="relative aspect-[16/10]">
-                      <Image
-                        src={withBasePath(screenshot.src) ?? screenshot.src}
-                        alt={screenshot.alt}
-                        fill
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        className="object-contain"
-                      />
-                    </div>
-                    <figcaption className="border-t border-border px-3 py-2 text-xs text-muted-foreground">
-                      {screenshot.caption}
-                    </figcaption>
-                  </figure>
-                ))}
-              </div>
-            )}
-          </SectionBlock>
+          {project.screenshotImages && (
+            <ScreenshotGallery
+              intro={project.screenshots[0]}
+              screenshots={project.screenshotImages}
+              labels={{
+                title: t.projects.details.screenshots,
+                close: lang === "fr" ? "Fermer" : "Close",
+                previous: lang === "fr" ? "Précédente" : "Previous",
+                next: lang === "fr" ? "Suivante" : "Next",
+              }}
+            />
+          )}
 
           {project.demoVideo && <DemoVideo video={project.demoVideo} />}
 

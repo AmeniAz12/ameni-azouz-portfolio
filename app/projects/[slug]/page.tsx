@@ -9,6 +9,20 @@ interface ProjectPageProps {
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { slug } = await params
 
+  if (slug === "backbone-ip-mpls-enterprise") {
+    return {
+      title: "Enterprise IP/MPLS Backbone Network | Ameni Azzouz",
+      description:
+        "Case study covering an IP/MPLS backbone with VPN/VRF, OSPF, LDP, MP-BGP, redundant LAN services, AAA/RADIUS, Zabbix, FortiGate HA and DMZ integration.",
+      openGraph: {
+        title: "Enterprise IP/MPLS Backbone Network | Ameni Azzouz",
+        description:
+          "GNS3 network engineering project with MPLS VPN, VRF isolation, high availability, monitoring and firewall-secured DMZ.",
+        images: ["/images/projects/mpls-backbone/mpls-vpn-topology.webp"],
+      },
+    }
+  }
+
   if (slug === "agent-tesla-malware-analysis") {
     return {
       title: "Agent Tesla Malware Analysis | Ameni Azzouz",

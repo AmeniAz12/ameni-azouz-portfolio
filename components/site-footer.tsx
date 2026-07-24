@@ -5,14 +5,16 @@ import { GithubIcon, LinkedinIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { CONTACT } from "@/lib/i18n/translations"
 
-const LINKS = ["about", "projects", "skills", "certifications", "contact"] as const
+const LINKS = ["about", "education", "projects", "experience", "skills", "certifications", "contact"] as const
 
 export function SiteFooter() {
   const { t } = useLanguage()
 
   const labels: Record<(typeof LINKS)[number], string> = {
     about: t.nav.about,
+    education: t.nav.education,
     projects: t.nav.projects,
+    experience: t.nav.experience,
     skills: t.nav.skills,
     certifications: t.nav.certifications,
     contact: t.nav.contact,

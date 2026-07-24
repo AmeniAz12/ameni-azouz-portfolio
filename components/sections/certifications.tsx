@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { Award } from "lucide-react"
+import { Award, CheckCircle2, Clock3 } from "lucide-react"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { withBasePath } from "@/lib/site-paths"
 import { Reveal } from "@/components/reveal"
@@ -22,22 +22,23 @@ export function Certifications() {
         />
 
         {[
-          { title: t.certifications.achievedTitle, items: t.certifications.items.filter((cert) => ACHIEVED.includes(cert.status)) },
-          { title: t.certifications.inProgressTitle, items: t.certifications.items.filter((cert) => !ACHIEVED.includes(cert.status)) },
+          { title: t.certifications.achievedTitle, items: t.certifications.items.filter((cert) => ACHIEVED.includes(cert.status)), achievedGroup: true },
+          { title: t.certifications.inProgressTitle, items: t.certifications.items.filter((cert) => !ACHIEVED.includes(cert.status)), achievedGroup: false },
         ].map((group) => (
           <div key={group.title} className="mt-14">
             <h3 className="font-mono text-sm font-semibold uppercase tracking-wide text-primary">{group.title}</h3>
-            <div className="mt-5 grid gap-5 sm:grid-cols-2">
+            <div className={group.achievedGroup ? "mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-3" : "mt-5 grid gap-5 sm:grid-cols-2"}>
           {group.items.map((cert, i) => {
             const achieved = ACHIEVED.includes(cert.status)
+            const StatusIcon = achieved ? CheckCircle2 : Clock3
             return (
               <Reveal
                 key={cert.name}
                 delay={(i % 3) * 80}
-                className="flex items-start gap-4 rounded-2xl border border-border bg-card/60 p-5 transition-colors hover:border-primary/40"
+                className={achieved ? "flex items-start gap-4 rounded-2xl border border-primary/25 bg-card/65 p-5 transition-colors hover:border-primary/50" : "flex items-start gap-4 rounded-2xl border border-border bg-card/45 p-5 transition-colors hover:border-primary/30"}
               >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent">
-                  <Award className="h-5 w-5" aria-hidden="true" />
+                <span className={achieved ? "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary" : "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-secondary text-muted-foreground"}>
+                  {achieved ? <Award className="h-5 w-5" aria-hidden="true" /> : <Clock3 className="h-5 w-5" aria-hidden="true" />}
                 </span>
                 <div className="min-w-0 flex-1">
                   {cert.certificateImage && (
@@ -60,10 +61,11 @@ export function Certifications() {
                     <span
                       className={
                         achieved
-                          ? "rounded-full bg-primary/15 px-2 py-0.5 text-xs font-medium text-primary"
+                          ? "inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-xs font-medium text-primary"
                           : "rounded-full bg-secondary px-2 py-0.5 text-xs font-medium text-muted-foreground"
                       }
                     >
+                      {achieved && <StatusIcon className="h-3 w-3" aria-hidden="true" />}
                       {cert.status}
                     </span>
                   </div>

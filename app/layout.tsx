@@ -3,13 +3,13 @@ import type { Metadata, Viewport } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ameni-azouz.vercel.app"),
+  metadataBase: new URL("https://ameniaz12.github.io/ameni-azouz-portfolio"),
   title: {
-    default: "Ameni Azzouz - Cybersecurity Engineering Student",
+    default: "Ameni Azzouz | Cybersecurity · DevSecOps · Cloud Security",
     template: "%s | Ameni Azzouz",
   },
   description:
-    "Bilingual portfolio of Ameni Azzouz, cybersecurity engineering student. DevSecOps, application security, cloud security, penetration testing, malware analysis and SIEM. Available for a graduation internship or junior opportunity starting January 2027.",
+    "Cybersecurity portfolio of Ameni Azzouz. DevSecOps, application security, cloud security, penetration testing, SOC/SIEM and malware analysis. Graduation internship in France from January 2027 and available now for junior cybersecurity opportunities.",
   keywords: [
     "cybersecurity",
     "cybersecurite",
@@ -27,10 +27,10 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Ameni Azzouz" }],
   openGraph: {
-    title: "Ameni Azzouz - Cybersecurity Engineering Student",
+    title: "Ameni Azzouz | Cybersecurity · DevSecOps · Cloud Security",
     description:
-      "DevSecOps, application security, cloud security, penetration testing, malware analysis and SIEM. Bilingual FR/EN portfolio.",
-    url: "https://ameni-azouz.vercel.app",
+      "DevSecOps, application security, cloud security, penetration testing, SOC/SIEM and malware analysis. FR/EN portfolio.",
+    url: "https://ameniaz12.github.io/ameni-azouz-portfolio",
     type: "website",
     locale: "fr_FR",
     alternateLocale: ["en_US"],
@@ -46,17 +46,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ameni Azzouz - Cybersecurity Engineering Student",
+    title: "Ameni Azzouz | Cybersecurity · DevSecOps · Cloud Security",
     description:
-      "DevSecOps, application security, cloud security, penetration testing, malware analysis and SIEM. Available from January 2027.",
+      "DevSecOps, application security, cloud security, penetration testing, SOC/SIEM and malware analysis. Available now for junior cybersecurity opportunities.",
     images: ["/og-image.svg"],
   },
   alternates: {
     canonical: "/",
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/apple-icon.png",
+    icon: "https://ameniaz12.github.io/ameni-azouz-portfolio/icon.svg",
+    apple: "https://ameniaz12.github.io/ameni-azouz-portfolio/apple-icon.png",
   },
 }
 

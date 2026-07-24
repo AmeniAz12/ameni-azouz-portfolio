@@ -13,6 +13,8 @@ media-prep/
 # Common ignores
 node_modules
 .next/
+out/
+tmp/
 .DS_Store
 
 .vercel

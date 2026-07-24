@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowRight, Download, Mail, Circle } from "lucide-react"
-import { GithubIcon } from "@/components/brand-icons"
+import { ArrowRight, Download, Circle } from "lucide-react"
+import { GithubIcon, LinkedinIcon } from "@/components/brand-icons"
 import { useLanguage } from "@/lib/i18n/language-context"
 import { NetworkBackground } from "@/components/network-background"
 import { CONTACT } from "@/lib/i18n/translations"
@@ -81,11 +81,22 @@ export function Hero() {
             {t.hero.title}
           </h1>
 
-          <p className="mt-4 font-mono text-sm text-primary sm:text-base">{t.hero.subtitle}</p>
+          <p className="mt-4 text-balance text-xl font-semibold text-primary sm:text-2xl">{t.hero.subtitle}</p>
 
           <p className="mt-5 max-w-xl text-pretty leading-relaxed text-muted-foreground">
             {t.hero.description}
           </p>
+
+          <div className="mt-6 flex flex-wrap gap-2">
+            {t.hero.availabilityBadges.map((badge) => (
+              <span
+                key={badge}
+                className="rounded-full border border-primary/25 bg-primary/10 px-3 py-1.5 font-mono text-xs text-primary"
+              >
+                {badge}
+              </span>
+            ))}
+          </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
             <a
@@ -107,27 +118,25 @@ export function Hero() {
               href={CONTACT.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/50 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <GithubIcon className="h-4 w-4" />
               {t.hero.github}
             </a>
             <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              href={CONTACT.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-3 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
-              <Mail className="h-4 w-4" aria-hidden="true" />
+              <LinkedinIcon className="h-4 w-4" />
               {t.hero.contact}
             </a>
           </div>
-
-          <p className="mt-6 font-mono text-xs text-muted-foreground">
-            {t.hero.availability} {t.hero.location}
-          </p>
         </div>
 
         <div className="flex flex-1 justify-center lg:justify-end">
-          <div className="animate-float-slow">
+          <div>
             <TerminalCard lines={t.hero.terminalLines} />
           </div>
         </div>

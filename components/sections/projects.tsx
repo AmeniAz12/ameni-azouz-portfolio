@@ -33,7 +33,7 @@ function ProjectLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="inline-flex items-center gap-1.5 rounded-md border border-border bg-secondary/30 px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       {icon}
       {label}
@@ -48,7 +48,7 @@ function ProjectCard({ project, delay }: { project: ProjectContent; delay: numbe
     <Reveal
       as="article"
       delay={delay}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card/60 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
+      className="group flex h-full min-h-[520px] flex-col overflow-hidden rounded-xl border border-border bg-card/60 transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5"
     >
       <div className="relative aspect-[16/9] border-b border-border bg-secondary/40">
         <Image
@@ -56,28 +56,28 @@ function ProjectCard({ project, delay }: { project: ProjectContent; delay: numbe
           alt={project.coverAlt}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover opacity-80"
+          className="object-cover"
         />
       </div>
 
       <div className="flex flex-1 flex-col p-6">
         <p className="font-mono text-xs uppercase tracking-wide text-primary">{project.category}</p>
         <h3 className="mt-2 text-lg font-semibold leading-snug text-balance">{project.title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-4">
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground line-clamp-3">
           {project.shortDescription}
         </p>
 
         <div className="mt-4 flex flex-wrap gap-2">
-          {project.tags.slice(0, 5).map((tag) => (
+          {project.tags.slice(0, 4).map((tag) => (
             <Tag key={tag}>{tag}</Tag>
           ))}
         </div>
 
-        <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-border/60 pt-4">
+        <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-border/60 pt-5">
           <Link
             href={`/projects/${project.slug}`}
             aria-label={`${t.projects.viewCaseStudy}: ${project.title}`}
-            className="inline-flex items-center gap-1.5 rounded-md text-sm font-medium text-primary transition-colors hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {t.projects.viewCaseStudy}
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

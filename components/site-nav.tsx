@@ -9,15 +9,12 @@ import { CONTACT } from "@/lib/i18n/translations"
 import { withBasePath } from "@/lib/site-paths"
 
 const SECTIONS = [
-  "home",
   "about",
-  "experience",
+  "education",
   "projects",
+  "experience",
   "skills",
   "certifications",
-  "education",
-  "languages",
-  "resume",
   "contact",
 ] as const
 
@@ -53,15 +50,12 @@ export function SiteNav() {
   }, [])
 
   const navLabels: Record<(typeof SECTIONS)[number], string> = {
-    home: t.nav.home,
     about: t.nav.about,
-    experience: t.nav.experience,
+    education: t.nav.education,
     projects: t.nav.projects,
+    experience: t.nav.experience,
     skills: t.nav.skills,
     certifications: t.nav.certifications,
-    education: t.nav.education,
-    languages: t.caseStudies.label,
-    resume: t.nav.resume,
     contact: t.nav.contact,
   }
 
@@ -86,7 +80,7 @@ export function SiteNav() {
           <span>Ameni Azzouz</span>
         </a>
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden items-center gap-1 xl:flex">
           {SECTIONS.map((id) => (
             <a
               key={id}
@@ -118,7 +112,7 @@ export function SiteNav() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : t.nav.menuLabel}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring xl:hidden"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -128,7 +122,7 @@ export function SiteNav() {
       {open && (
         <div
           id="mobile-menu"
-          className="border-t border-border bg-background/95 backdrop-blur-md lg:hidden"
+          className="border-t border-border bg-background/95 backdrop-blur-md xl:hidden"
         >
           <div className="mx-auto grid max-w-6xl grid-cols-2 gap-1 px-4 py-4 sm:px-6">
             {SECTIONS.map((id) => (
